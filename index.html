@@ -1,0 +1,478 @@
+<! Proprietary Software
+Copyright © 2026 Rev. Don Victor,  PhD. All rights Reserved.
+
+This software is proprietary and confidential. No license or other
+rights are granted except pursuant to a written agreement signed
+by the copyright owner.
+
+Except as expressly authorized in writing, you may not copy,
+reproduce, modify, distribute, publish, sublicense, create
+derivative works from, reverse engineer, decompile, or otherwise
+use this software or any portion thereof.
+
+Unauthorized use may violate copyright, trade secret, and other
+applicable laws and may result in civil and criminal liability.
+
+For licensing inquiries, contact:
+Rev. Don Victor, PhD 
+email: donvictorministry@gmail.com 
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Code Repository">
+<meta name="theme-color" content="#1877F2" />
+<title>Code Repository</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div id="app">
+  <header class="header">
+    <div class="header-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+      <span>Code Repo</span>
+    </div>
+    <div class="header-actions">
+      <!-- Online/Offline badge -->
+      <div id="net-badge">
+        <span class="net-dot"></span>
+        <span id="net-label">Online</span>
+      </div>
+      <button class="icon-btn" id="lock-write-btn" title="Lock Write Access" aria-label="Lock Write Access">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="logout-btn" title="Logout" aria-label="Logout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="three-dot-btn" title="Menu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="5" r="1.2" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- VAU -->
+  <div class="view" id="view-auth">
+    <div class="auth-card">
+      <div class="auth-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+    
+  <h2>Code Repository</h2>
+      <div class="auth-field">
+        <label for="admin-key-input">Admin Key</label>
+        <input type="password" id="admin-key-input" placeholder="Enter your admin key" autocomplete="current-password" />
+        <button class="pw-toggle" id="pw-toggle" type="button" title="Show/hide key">
+          <svg id="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          <svg id="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        </button>
+      </div>
+    
+  <p class="auth-error" id="auth-error">Invalid admin key. Please try again.</p>
+      <button class="btn-primary" id="login-btn" type="button">
+        <span id="login-btn-text">Unlock Repository</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="view" id="view-explorer">
+    <div class="explorer-search-row">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="search-input" placeholder="Search files & projects…" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="nav-strip" id="nav-strip" role="navigation" aria-label="App navigation">
+      <button class="nav-btn nav-active" id="nav-home" title="File Explorer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Explorer
+      </button>
+      <button class="nav-btn" id="nav-new-project" title="New Project">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          <line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/>
+        </svg>
+        New Project
+      </button>
+      <button class="nav-btn" id="nav-new-file" title="New File">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+        </svg>
+        New File
+      </button>
+      
+<button class="nav-btn" id="nav-editor" title="Open Code Editor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+        Code Editor
+      </button>
+      <div class="nav-divider"></div>
+      <button class="nav-btn" id="nav-viewer" title="Code Viewer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+        </svg>
+        View Code
+      </button>
+      <button class="nav-btn" id="nav-preview" title="Live Preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        Live Preview
+      </button>
+      <div class="nav-divider"></div>
+      <button class="nav-btn" id="nav-save-device" title="Save to Device">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Save Device
+      </button>
+      <button class="nav-btn" id="nav-push-drive" title="Push to Drive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+        </svg>
+        Push Drive
+      </button>
+      <button class="nav-btn" id="nav-sync" title="Sync from Drive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        Sync Drive
+      </button>
+      <button class="nav-btn" id="nav-stats" title="Repository Stats">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+        Stats
+      </button>
+      <button class="nav-btn" id="nav-howto" title="How to Use">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        How to Use
+      </button>
+    </div>
+
+    <div class="new-project-form" id="new-project-form">
+      <input type="text" id="new-project-name" placeholder="Project name…" maxlength="80" />
+      <button id="create-project-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;display:inline">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Create
+      </button>
+      <button id="cancel-project-btn" style="background:var(--surface2);border-radius:var(--radius-sm);padding:10px 14px;min-height:44px;">Cancel</button>
+    </div>
+
+    <div class="explorer-stats" id="explorer-stats" style="display:none;">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <strong id="stat-projects">—</strong> Projects
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <strong id="stat-files">—</strong> Files
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Last sync: <strong id="stat-sync">—</strong>
+      </span>
+    </div>
+
+    <div class="project-list" id="project-list">
+      <div class="empty-state" id="explorer-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+        <p>No projects found. Create one to get started.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-viewer">
+    <div class="viewer-header">
+      <button class="back-btn" id="viewer-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Back
+      </button>
+      <span class="viewer-title" id="viewer-filename">—</span>
+      <span id="viewer-badge" class="badge">—</span>
+      <div class="viewer-actions">
+        <button class="btn-outline" id="copy-code-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="copy-btn-text">Copy</span>
+        </button>
+        <button class="btn-green" id="preview-btn" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          Preview
+        </button>
+        <button class="btn-blue" id="edit-file-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          Edit
+        </button>
+      </div>
+    </div>
+    <div class="code-viewer-wrap">
+      <div class="code-block-container" id="code-block-container">
+        <div class="line-numbers" id="line-numbers"></div>
+        <pre class="code-content" id="code-content"></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-editor">
+    <div id="drafts-ticker-wrap" style="overflow:hidden; white-space:nowrap; background:var(--surface); border-bottom:1.5px solid var(--border); padding:8px 0;">
+      <div id="drafts-ticker" style="display:inline-block; white-space:nowrap; padding-right:100%;"></div>
+    </div>
+    <div class="editor-toolbar">
+      <button class="toolbar-tool" id="tool-new-file" title="New File"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>      
+      <!-- 12. Console -->
+        <button class="we-tool" id="dv-bible-game-widget-trigger" title="Play 3D Jesus"><svg viewBox="0 0 24 24" width="20" height="20"><text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="currentColor">3D</text></svg></button>
+       <button class="we-tool" id="t-devtools" title="DevTools"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></button>
+       </button>       
+       <button class="toolbar-tool" id="vsw-toggle-btn" onclick="window.toggleVSW()" title="Open Source Fetcher" aria-label="Open Source Fetcher">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        </button>     
+       <button id="dv-sf-trigger" title="Source Fetcher" aria-label="Open Source Fetcher" onclick="dvSF.open()" style="flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#EAF2FE;color:#1877F2;border:1.5px solid #d6e4fb;border-radius:9px;cursor:pointer;transition:background .12s,color .12s;font-family:'Roboto',system-ui,sans-serif;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+      <button class="toolbar-tool" id="tool-tab" title="Indent (Tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/><line x1="9" y1="12" x2="21" y2="12"/></svg></button>
+      <button class="toolbar-tool" id="tool-wrap" title="Toggle Word Wrap"><span style="font-weight:800;font-size:0.9rem;">Wrap</span></button>
+      <button class="toolbar-tool" id="tool-lines" title="Toggle Line Numbers"><span style="font-weight:800;font-size:0.9rem;">123</span></button>
+      <button class="toolbar-tool" id="tool-contrast" title="Toggle Pure White / Charcoal Black Editor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20v-20z" fill="currentColor"/></svg></button>
+      <button class="toolbar-tool snippet-btn" data-insert="<!DOCTYPE html>\n<html>\n<head>\n  <title></title>\n</head>\n<body>\n  \n</body>\n</html>" data-offset="-16" title="HTML Skeleton"><span style="font-weight:800;font-size:0.9rem;">HTML</span></button>
+      <button class="toolbar-tool snippet-btn" data-insert="<script>\n  \n</script>" data-offset="-10" title="Script Tag"><span style="font-weight:800;font-size:0.9rem;">{ JS }</span></button>
+      <button class="toolbar-tool snippet-btn" data-insert="<div></div>" data-offset="-6" title="Div Tag"><span style="font-weight:800;font-size:0.9rem;">&lt;div&gt;</span></button>
+      <button class="toolbar-tool snippet-btn" data-insert="</>" data-offset="0" title="Close Tag"><span style="font-weight:800;font-size:0.9rem;">&lt;/&gt;</span></button>
+      <button class="toolbar-tool snippet-btn" data-insert="https://" data-offset="0" title="HTTPS"><span style="font-weight:800;font-size:0.9rem;">https://</span></button>
+      <button class="toolbar-tool" id="undo-btn" title="Undo" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg><span>Undo</span></button>
+      <button class="toolbar-tool" id="redo-btn" title="Redo" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg><span>Redo</span></button>
+      <button class="toolbar-tool" id="tool-search" title="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <button class="toolbar-tool" id="tool-paste" title="Paste"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></button>
+      <button class="toolbar-tool" id="tool-copy" title="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+      <button class="toolbar-tool" id="tool-highlight" title="Highlight (Select All)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M9 3v18"/><path d="M3 9h18"/></svg></button>
+      <button class="toolbar-tool" id="tool-bold" title="Bold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg></button>
+      <button class="toolbar-tool" id="tool-zoom-in" title="Zoom In (+)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></button>
+      <button class="toolbar-tool" id="tool-zoom-out" title="Zoom Out (-)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></button>
+      <button class="toolbar-tool" id="tool-delete" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="var(--danger)"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+      <button class="toolbar-tool" id="tool-preview" title="Preview Editor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="var(--success)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+<button class="toolbar-tool" id="tool-exit" title="Exit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+    </div>
+
+    <div class="editor-tabs" id="editor-tabs"></div>
+    <div class="editor-area-wrap" style="display:flex; flex-direction:row; overflow:hidden;">
+      <div id="editor-line-numbers" style="display:none; text-align:right; padding:12px 8px; background:var(--surface2); color:var(--text-muted); font-family:'Roboto', 'Segoe UI', system-ui, sans-serif; font-size:18px; line-height:1.35; overflow:hidden; user-select:none; border-right:1.5px solid var(--border); box-sizing:border-box; flex-shrink:0;"></div>
+      <textarea id="code-textarea" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="Start typing your code here…" style="flex:1; width:100%; white-space:pre; overflow:auto; padding:12px 12px 50vh 12px;"></textarea>
+    </div>
+    <div class="editor-footer" style="padding:8px; display:flex; gap:6px; background:var(--surface); border-top:1.5px solid var(--border); flex-wrap:nowrap; overflow-x:auto;">
+      <button class="back-btn" id="editor-back" style="height:40px; background:var(--surface2); border-radius:6px; padding:0 12px; display:flex; align-items:center; justify-content:center; margin:0; flex-shrink:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+      <button class="btn-outline" id="save-local-btn" style="height:40px; min-height:40px; padding:0 12px; white-space:nowrap; flex-shrink:0; margin:0;">Device</button>
+      <button class="btn-primary" id="push-drive-btn" style="height:40px; min-height:40px; padding:0 12px; white-space:nowrap; flex-shrink:0; margin:0;">Drive</button>
+    </div>
+    <div style="display:none;"><select id="editor-project"></select><span id="draft-indicator"></span></div>
+  </div>
+</div><!-- #app -->
+<div id="preview-modal">
+  <div class="preview-bar">
+    <span id="preview-title">Live Preview</span>
+    <button class="close-preview" id="close-preview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <iframe id="preview-iframe" sandbox="allow-scripts allow-forms allow-same-origin" title="Live Preview"></iframe>
+</div>
+
+<div id="confirm-dialog" role="dialog" aria-modal="true">
+  <div class="confirm-card">
+    <h3 id="confirm-title">Confirm</h3>
+    <p id="confirm-message">Are you sure?</p>
+    <div class="confirm-actions">
+      <button class="confirm-cancel" id="confirm-cancel">Cancel</button>
+      <button class="confirm-ok" id="confirm-ok">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="sudo-modal" style="display:none; position:fixed; inset:0; z-index:600; background:rgba(0,0,0,0.65); align-items:center; justify-content:center; padding:16px;">
+  <div class="auth-card" style="margin:0; box-shadow:0 4px 24px rgba(0,0,0,0.22);">
+    <h3 style="color:var(--primary); text-align:center; margin-bottom:8px;">Write Access Required</h3>
+    <p style="font-size:0.9rem; color:var(--text-muted); text-align:center; margin-bottom:16px;">Enter your admin key to authorize this action.</p>
+    <input type="password" id="sudo-key-input" placeholder="Admin Key" style="margin-bottom:16px; background:var(--surface2);" />
+    <div style="display:flex; gap:10px;">
+      <button id="sudo-cancel-btn" style="flex:1; background:var(--surface2); border-radius:var(--radius-sm); padding:10px; font-weight:600;">Cancel</button>
+      <button id="sudo-submit-btn" style="flex:1; background:var(--primary); color:#fff; border-radius:var(--radius-sm); padding:10px; font-weight:600;">Authorize</button>
+    </div>
+  </div>
+</div>
+<!- ============================================
+           Proprietary Software
+           Copyright © 2026 Rev. Don Victor, PhD.
+           All rights reserved.
+           ============================================ -->
+<div id="menu-overlay"></div>
+<nav id="side-menu" role="navigation" aria-label="App menu">
+  <div class="side-menu-header">
+    <span>Code Repository</span>
+    <button id="close-side-menu" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="side-menu-section-label">Themes</div>
+  <button class="side-menu-item" id="theme-light-btn">
+    <div class="theme-dot" style="background:#f5f7fa;border-color:#1877F2;"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    Light Mode
+  </button>
+  <button class="side-menu-item" id="theme-green-btn">
+    <div class="theme-dot" style="background:#2e7d32;border-color:#2e7d32;"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Green Mode
+  </button>
+  <button class="side-menu-item" id="theme-purple-btn">
+    <div class="theme-dot" style="background:#7b1fa2;border-color:#7b1fa2;"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    Purple Mode
+  </button>
+  <button class="side-menu-item" id="theme-dark-btn">
+    <div class="theme-dot" style="background:#18191a;border-color:#555;"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+    Dark Mode
+  </button>
+  <div class="side-menu-divider"></div>
+  <div class="side-menu-section-label">Local Drafts</div>
+  <div id="side-menu-drafts-list"></div>
+  <button class="side-menu-item" id="refresh-drafts-btn" style="font-size:0.85rem; min-height:40px; color:var(--primary);">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    Refresh Offline Drafts
+  </button>
+  <div class="side-menu-divider"></div>
+  <div class="side-menu-section-label">App</div>
+  <button class="side-menu-item" id="menu-share-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    Share App
+  </button>
+  <button class="side-menu-item" id="menu-install-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Install App
+  </button>
+  <button class="side-menu-item" id="menu-howto-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    How to Use
+  </button>
+  <div class="side-menu-divider"></div>
+  <button class="side-menu-item" id="menu-copyright-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83A4 4 0 1 1 9.17 9.17"/></svg>
+    Copyright Notice
+  </button>
+</nav>
+
+<div id="howto-modal" style="display:none; position:fixed; inset:0; z-index:800; background:rgba(0,0,0,0.65); align-items:center; justify-content:center; padding:16px; overflow-y:auto;">
+  <div style="background:var(--surface); border-radius:var(--radius); max-width:480px; width:100%; padding:28px 24px; box-shadow:0 4px 32px rgba(0,0,0,0.28); display:flex; flex-direction:column; gap:16px; max-height:90vh; overflow-y:auto;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <h2 style="color:var(--primary); font-size:1.2rem;">How to Use Code Repository</h2>
+      <button id="close-howto" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-muted);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div style="font-size:0.92rem; color:var(--text); line-height:1.7; display:flex; flex-direction:column; gap:12px;">
+      <p><strong style="color:var(--primary);">1. Login</strong> — Enter your Key to unlock the repository.</p>
+      <p><strong style="color:var(--primary);">2. Explorer</strong> — Browse all projects and files. Works fully offline from cached data.</p>
+      <p><strong style="color:var(--primary);">3. New Project</strong> — Creates a folder cloud storage (requires network).</p>
+      <p><strong style="color:var(--primary);">4. New File</strong> — Opens the Code Editor for a new file in any project.</p>
+      <p><strong style="color:var(--primary);">5. Code Editor</strong> — Full-screen editor. Snippets, Undo, Redo, Search, Line Numbers, Zoom, Wrap, Contrast toggle.</p>
+      <p><strong style="color:var(--primary);">6. View Code</strong> — Opens the viewer with line numbers and copy button.</p>
+      <p><strong style="color:var(--primary);">7. Live Preview</strong> — Renders .html files in a live preview...works offline.</p>
+      <p><strong style="color:var(--primary);">8. Save Device</strong> — Downloads your code as a real file to your device. 100% offline.</p>
+      <p><strong style="color:var(--primary);">9. Push Drive</strong> — Sends code to Drive via servers (requires network + admin key).</p>
+      <p><strong style="color:var(--primary);">10. Sync Drive</strong> — Manually refreshes the project tree from Drive. Only time network is used.</p>
+      <p><strong style="color:var(--primary);">11. Offline Drafts</strong> — Open the three-dot menu to view, load, and manage all local drafts.</p>
+    </div>
+  </div>
+</div>
+
+<div id="copyright-modal" style="display:none; position:fixed; inset:0; z-index:800; background:rgba(0,0,0,0.65); align-items:center; justify-content:center; padding:16px; overflow-y:auto;">
+  <div style="background:var(--surface); border-radius:var(--radius); max-width:480px; width:100%; padding:28px 24px; box-shadow:0 4px 32px rgba(0,0,0,0.28); display:flex; flex-direction:column; gap:16px; max-height:90vh; overflow-y:auto;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <h2 style="color:var(--danger); font-size:1.2rem; display:flex; align-items:center; gap:8px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Copyright Notice
+      </h2>
+      <button id="close-copyright" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-muted);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div style="background:#fdecea; border-radius:var(--radius-sm); padding:16px; border-left:4px solid var(--danger);">
+      <p style="font-size:0.95rem; font-weight:700; color:var(--danger); margin-bottom:8px;">UNAUTHORIZED USE</p>
+      <p style="font-size:0.88rem; color:var(--text); line-height:1.7;">This application and all its source code is the exclusive intellectual property of <strong>Rev. Don Victor, PhD</strong> — President, Don VictorMinistries</p>
+    </div>
+    <div style="font-size:0.88rem; color:var(--text); line-height:1.7; display:flex; flex-direction:column; gap:10px;">
+      <p>All code, designs, workflows, and architecture in this repository are protected under international copyright law.</p>
+      <p><strong>Unauthorized copying, redistribution, resale, or impersonation of this work is strictly prohibited</strong> and constitutes a criminal offence subject to legal prosecution.</p>
+      <p>This tool was built for private ministry use in digital evangelism across Africa and beyond. It is not open-source and carries no public licence.</p>
+      <p>If you received this code from anyone other than the original author, you are in possession of stolen intellectual property.</p>
+      <p style="font-weight:700; color:var(--primary);">Don Victor Ministries&copy; 2026 — All Rights Reserved.<br/>Built by Rev. Don Victor, PhD.</p>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+<script src="game.js"></script>
+<script src="tele-guide.js"></script>
+<script src="dev.js"></script>
+<script src="console.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>
