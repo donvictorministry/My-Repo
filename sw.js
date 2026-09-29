@@ -1,11 +1,15 @@
-const CACHE_NAME = 'code-repo-v2.2';
+const CACHE_NAME = 'code-repo-v2.3';
 const CORE_ASSETS = [
   './',
   './index.html',
   './style.css',
   './tele-guide.js',
   './console.js',
-  './app.html',
+  './app.js',
+  './dev.js',
+  './tool.js',
+  './editor.js',
+  './game.js',
   './manifest.json'
 ];
 
