@@ -465,22 +465,15 @@ email: donvictorministry@gmail.com
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-  fetch('app.html')
-    .then(res => res.text())
-    .then(html => {
-      const wrapper = document.createElement('div');
-      wrapper.innerHTML = html;
-      document.body.appendChild(wrapper);
-           wrapper.querySelectorAll('script').forEach(oldScript => {
-        const newScript = document.createElement('script');
-        newScript.textContent = oldScript.textContent;
-        document.body.appendChild(newScript);
-      });
-    })
-    .catch(() => {});
-</script>      
-<script src="console.js"></script>
+<script src="app.js"></script>
+<script src="game.js"></script>
 <script src="tele-guide.js"></script>
+<script src="dev.js"></script>
+<script src="console.js"></script>
+<script src="editor.js"></script>
+<script src="tool.js"></script>
 </body>
 </html>
+
+  
+
