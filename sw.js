@@ -1,4 +1,4 @@
-const CACHE_NAME = 'code-repo-v2.1';
+const CACHE_NAME = 'code-repo-v2.2';
 const CORE_ASSETS = [
   './',
   './index.html',
