@@ -1,5 +1,5 @@
 
-const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwMv8QpS5CF8E13BgNtIVLsgBuE5PeYHFL383dxAu7vat-58GvJqT3eqocIc_etEj9ofg/exec";
+const GAS_API_URL = "https://script.google.com/macros/s/AKfycbyemrOKunwm3Xfuo07TRpGMre22sHn1ciO_LXw-prDKlBH_N9Z4dK2aFsbX2KFkAfoFNQ/exec";
 const appState = {
   adminKey: null,
   projects: [],
