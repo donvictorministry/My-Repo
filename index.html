@@ -465,24 +465,21 @@ email: donvictorministry@gmail.com
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script>
+  <script>
   fetch('app.html')
     .then(res => res.text())
     .then(html => {
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      
-      Array.from(doc.body.childNodes).forEach(node => {
-        if (node.tagName === 'SCRIPT') {
-          const activeScript = document.createElement('script');
-          activeScript.textContent = node.textContent;
-          document.body.appendChild(activeScript);
-        } else {
-          document.body.appendChild(node);
-        }
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+      document.body.appendChild(wrapper);
+           wrapper.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        document.body.appendChild(newScript);
       });
     })
     .catch(() => {});
-</script>
+</script>      
 <script src="console.js"></script>
 <script src="tele-guide.js"></script>
 </body>
