@@ -5,7 +5,7 @@ const CORE_ASSETS = [
   './style.css',
   './tele-guide.js',
   './console.js',
-  './app.js',
+  './app.html',
   './manifest.json'
 ];
 
