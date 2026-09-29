@@ -1,4 +1,4 @@
-const CACHE_NAME = 'code-repo-v1.2';
+const CACHE_NAME = 'code-repo-v1.3';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   './editor.js',
   './tele-guide.js',
   './console.js',
+  './app.js',
   './manifest.json'
 ];
 
